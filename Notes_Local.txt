@@ -1,0 +1,38 @@
+# 1. Install requirements
+pip install -r requirements.txt
+
+# 2. Setup database in MySQL
+CREATE DATABASE quiz_scheduling_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# 3. Run migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# 4. Initialize periods
+python manage.py initialize_periods
+
+# 5. Run server
+python manage.py runserver
+
+
+
+
+
+
+==============
+For creating a superuser
+python manage.py createsuperuser
+
+
+
+
+
+
+
+
+===========
+Sometimes needed
+# Delete all migrations and database
+rm -r quiz_scheduling_app/migrations/
+python manage.py makemigrations
+python manage.py migrate

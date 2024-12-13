@@ -1,0 +1,29 @@
+1- Firstly we create an EC2 instance on aws
+2- We create a database instance on aws and then we connect the EC2 instance to the database instance
+3- We install mysql-client on the instance using 
+sudo apt update
+sudo apt install mysql-client
+4- We try to test the connection to the db using, 
+mysql -h your-remote-db-endpoint -u yourusername -p
+# in our case here: mysql -h database-1.c1k8kme2oilo.eu-north-1.rds.amazonaws.com -u root -p
+5- We will create the db using the command:
+CREATE DATABASE quiz_scheduling_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+6- We change in settings.py DEBUG = True to False
+and we add this so that we can get ip address of instance and make it in the allowed hosts to the app (doubted if needed or not, as it may work without it)
+and surely we will need to add requests to the pip install requirements
+:
+import requests
+
+def get_public_ip():
+    try:
+        return requests.get('http://169.254.169.254/latest/meta-data/public-ipv4').text
+    except requests.RequestException:
+        return None
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+public_ip = get_public_ip()
+if public_ip:
+    ALLOWED_HOSTS.append(public_ip)
+7-
+
+
